@@ -1,0 +1,48 @@
+{% extends 'base.html' %} {% block title %} Homepage {% endblock title %} {%
+block heading %} Homepage {% endblock heading %} {%block body %}
+
+<form action="/" method="get">
+  <div class="input">
+    <label for="title1">Title</label>
+    <input type="text" name="title" id="title1" />
+  </div>
+  <div class="input">
+    <label for="desc1">Desc</label>
+    <input type="text" name="desc" id="desc1" />
+  </div>
+  <button type="submit">Add</button>
+</form>
+<center>
+  <h2>ToDo List</h2>
+</center>
+{% if allTodo|length == 0 %}
+<center><h2>Add something to Acieve it</h2></center>
+{% else %}
+<table>
+  <tr>
+    <th>#</th>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Action</th>
+  </tr>
+  {% for todo in allTodo %}
+  <tr>
+    <td>{{loop.index}}</td>
+    <td>{{todo.sno}}</td>
+    <td>{{todo.title}}</td>
+    <td>{{todo.desc}}</td>
+    <td>
+      <button>
+        <a style="color: blue" href="/update/{{todo.sno}}">Edit</a>
+      </button>
+    </td>
+    <td>
+      <button>
+        <a style="color: red" href="/delete/{{todo.sno}}">Delete</a>
+      </button>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %} {% endblock body %}
